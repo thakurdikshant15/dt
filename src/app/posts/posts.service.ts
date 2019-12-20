@@ -16,9 +16,9 @@ export class PostsService {
       .pipe(map((postData) => {
         return postData.posts.map(post => {
           return {
+            id : post._id,
             title: post.title,
-            content: post.content,
-            id : post._id
+            content: post.content
           };
         });
       }))
@@ -41,4 +41,12 @@ export class PostsService {
         this.postsUpdated.next([...this.posts]);
       });
   }
+
+ deletePost(postId: string) {
+    this.http.delete('http://localhost:3000/api/posts' + postId)
+      .subscribe(() => {
+        console.log('deleted');
+      });
+ }
+
 }

@@ -49,4 +49,9 @@ app.get("/api/posts",(req, res, next) => {
 
 });
 
+app.delete('http://api/posts/:id',(req , res, next) => {
+  console.log(res.params.id);
+  res.status(200).json({message:'Post Deleted'});
+});
+
 module.exports = app;
