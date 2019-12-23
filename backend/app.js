@@ -45,8 +45,9 @@ app.post("/api/posts",(req,res,next) => {
 
 app.put("/api/posts/:id", (req, res, next) => {
   const post = new Post({
-    title: req.params.title,
-    content: req.params.content
+    _id: req.params.id,
+    title: req.body.title,
+    content: req.body.content
   });
   Post.updateOne({_id: req.params.id}, post).then(result => {
     console.log(result);
