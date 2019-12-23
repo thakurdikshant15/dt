@@ -9,10 +9,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  // posts = [
-  //   {title: 'First Post', content:'This is first post content'},
-  //   {title: 'Second Post', content: 'This is second post content'}
-  // ];
 
   posts: Post[] = [];
   private postsSub: Subscription;
@@ -25,7 +21,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDelete(post.id: string) {
+  onDelete(postId: string) {
     this.postsService.deletePost(postId);
   }
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
+app = express();
 const Post = require('./models/post');
 const mongoose = require('mongoose');
 
@@ -16,13 +16,17 @@ app.use(bodyParser.json());
 
 
 app.use((req,res,next) => {
-  res.setHeader('Access-Control-Allow-Origin',"*");
+  res.setHeader(
+    'Access-Control-Allow-Origin','*'
+  );
   res.setHeader(
     'Access-Control-Allow-Headers',
-    "Origin, X-Requested-With, Content-Type, Accept");
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
   res.setHeader(
     'Access-Control-Allow-Methods',
-    "GET, POST, PATCH, DELETE, OPTIONS");
+    'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+  );
   next();
 });
 
@@ -31,11 +35,23 @@ app.post("/api/posts",(req,res,next) => {
     title: req.body.title,
     content: req.body.content
   });
-  post.save();
-  console.log(post);
-  res.status(201).json({
-    message: 'Post added successfully'
+  post.save().then(createdPost => {
+    res.status(201).json({
+      message: 'Post added successfully',
+      postId: createdPost._id
+    });
   });
+});
+
+app.put("/api/posts/:id", (req, res, next) => {
+  const post = new Post({
+    title: req.params.title,
+    content: req.params.content
+  });
+  Post.updateOne({_id: req.params.id}, post).then(result => {
+    console.log(result);
+    res.status(200).json ({message: " Update successful"});
+  } )
 });
 
 app.get("/api/posts",(req, res, next) => {
@@ -49,9 +65,14 @@ app.get("/api/posts",(req, res, next) => {
 
 });
 
-app.delete('http://api/posts/:id',(req , res, next) => {
-  console.log(res.params.id);
-  res.status(200).json({message:'Post Deleted'});
+
+
+app.delete("/api/posts/:id",(req , res, next) => {
+  Post.deleteOne({_id: req.params.id}).then(result => {
+    console.log(result);
+    res.status(200).json({message: "Post deleted"});
+  });
+
 });
 
 module.exports = app;

@@ -1,1 +1,11 @@
-<mat-toolbar color="primary">Notepad</mat-toolbar>
+<mat-toolbar color="primary">
+  <span>
+    <a routerLink="/">Notepad</a>
+  </span>
+
+  <span class="spacer"></span><ul>
+    <li>
+      <a mat mat-button routerLink="/create" routerLinkActive="mat-accent">Add Note</a>
+    </li>
+  </ul>
+</mat-toolbar>
