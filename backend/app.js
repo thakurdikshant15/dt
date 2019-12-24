@@ -4,7 +4,7 @@ app = express();
 const Post = require('./models/post');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://thakurdikshant15:<dikshant15>@dthakur-fh5k1.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true})
+mongoose.connect('mongodb+srv://thakurdikshant15:<QBg4CP0wxDAQRYBO>@dthakur-fh5k1.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true})
   .then(() => {
     console.log('Connected to database');
   })
